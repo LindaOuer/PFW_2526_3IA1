@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Conference
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 def home(request):
@@ -25,3 +25,11 @@ class ConferenceListView(ListView):
     model = Conference
     context_object_name = 'conferences'
     template_name = 'ConferenceApp/conference_list.html'
+    
+class ConferenceDetailView(DetailView):
+    model = Conference
+    
+    
+class ConferenceCreateView(CreateView):
+    model = Conference
+    fields ="__all__"
