@@ -1,3 +1,27 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Conference
+from django.views.generic import ListView
 
 # Create your views here.
+def home(request):
+    return HttpResponse("<h1>Welcome to the Conference App Home Page!</h1>")
+
+def about(request):
+    return render(request, 'ConferenceApp/about.html')
+
+def welcome(request, name):
+    return render(
+        request, 
+        'ConferenceApp/welcome.html', 
+        {'n': name} # context dictionary : passing 'name' as 'n' to the template
+    )
+    
+def listConferences(request):
+    conferences = Conference.objects.all().order_by('name')
+    return render(request, 'ConferenceApp/conference_list.html', {'conferences': conferences})
+
+class ConferenceListView(ListView):
+    model = Conference
+    context_object_name = 'conferences'
+    template_name = 'ConferenceApp/conference_list.html'
