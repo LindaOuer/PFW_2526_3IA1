@@ -9,4 +9,5 @@ urlpatterns = [
     path('listLV/', ConferenceListView.as_view(), name='conference_listLV'),
     path('details/<int:pk>/', ConferenceDetailView.as_view(), name='conference_details'),
     path('create/', ConferenceCreateView.as_view(), name='conference_create'),
+    path('update/<int:pk>/', ConferenceUpdateView.as_view(), name='conference_update'),
 ]

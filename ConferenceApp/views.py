@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Conference
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+
+from .forms import ConferenceForm
 
 # Create your views here.
 def home(request):
@@ -29,7 +32,13 @@ class ConferenceListView(ListView):
 class ConferenceDetailView(DetailView):
     model = Conference
     
-    
 class ConferenceCreateView(CreateView):
     model = Conference
+    # fields ="__all__"
+    form_class = ConferenceForm
+    success_url = reverse_lazy('conference_listLV')
+    
+class ConferenceUpdateView(UpdateView):
+    model = Conference
     fields ="__all__"
+    success_url = reverse_lazy('conference_listLV')
