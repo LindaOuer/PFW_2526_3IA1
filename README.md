@@ -11,8 +11,8 @@
 
 ## 1. Clone the repository
 ```bash
-git clone https://github.com/LindaOuer/PFW_2526_3IA5.git
-cd PFW_2526_3IA5
+git clone https://github.com/LindaOuer/PFW_2526_3IA1.git
+cd PFW_2526_3IA1
 ```
 ---
 
