@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %} Conference List {% endblock %}
+
+{% block content %}
 <h2> List of Conferences </h2>
 <ul>
 {% for conference in conferences %}
@@ -8,3 +13,4 @@
     </li>
 {% endfor %}
 </ul>
+{% endblock %}
