@@ -91,9 +91,19 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}"
-                ><i class="fa fa-sign-in"></i> Déconnexion</a
+              <form
+                method="post"
+                action="{% url 'logout' %}"
+                style="display: inline"
               >
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  class="nav-link btn btn-link p-0 border-0"
+                >
+                  <i class="fa fa-sign-out"></i> Déconnexion
+                </button>
+              </form>
             </li>
 
             {% else %}

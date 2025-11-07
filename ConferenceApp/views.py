@@ -5,8 +5,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
 from .forms import ConferenceForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
+
 def home(request):
     return HttpResponse("<h1>Welcome to the Conference App Home Page!</h1>")
 
@@ -32,11 +34,13 @@ class ConferenceListView(ListView):
 class ConferenceDetailView(DetailView):
     model = Conference
     
-class ConferenceCreateView(CreateView):
+class ConferenceCreateView(LoginRequiredMixin, UserPassesTestMixin,  CreateView):
     model = Conference
     # fields ="__all__"
     form_class = ConferenceForm
     success_url = reverse_lazy('conference_listLV')
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.role == 'organizer'
     
 class ConferenceUpdateView(UpdateView):
     model = Conference
