@@ -22,6 +22,7 @@
     />
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block CSS %}{% endblock %}
   </head>
   <body>
     <!-- Barre de navigation unique -->
@@ -87,6 +88,18 @@
             {% if user.is_authenticated %}
             <li class="nav-item">
               <span class="nav-link"><i class="fa fa-user-circle"></i> {{ user.username }} <br> {{ user.get_role_display }}</span
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"
+                ><i class="fa fa-sign-in"></i> Déconnexion</a
+              >
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}"
+                ><i class="fa fa-sign-in"></i> Connexion</a
               >
             </li>
      
