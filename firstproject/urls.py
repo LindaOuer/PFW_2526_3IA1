@@ -22,12 +22,23 @@ from UserApp.views import RegisterView
 
 from ConferenceApp.views import ConferenceViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 router = DefaultRouter()
 router.register(r'conferences', ConferenceViewSet)
 
 urlpatterns = [
     path('API/', include(router.urls)),
+    path('API/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('API/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('API/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    
+    
+    
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
