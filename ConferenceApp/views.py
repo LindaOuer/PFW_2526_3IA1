@@ -6,8 +6,26 @@ from django.urls import reverse_lazy
 
 from .forms import ConferenceForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from rest_framework import viewsets
+from .serializers import ConferenceSerializer
 
 # Create your views here.
+class ConferenceViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing conference instances.
+    - list()   -> GET /conferences/
+    - retrieve() -> GET /conferences/{id}/
+    - create() -> POST /conferences/
+    - update() -> PUT /conferences/{id}/
+    - partial_update() -> PATCH /conferences/{id}/
+    - destroy() -> DELETE /conferences/{id}/
+    """
+    queryset = Conference.objects.all()
+    serializer_class = ConferenceSerializer
+
+
+
+
 
 def home(request):
     return HttpResponse("<h1>Welcome to the Conference App Home Page!</h1>")

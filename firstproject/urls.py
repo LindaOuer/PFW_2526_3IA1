@@ -19,7 +19,15 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from UserApp.views import RegisterView
 
+
+from ConferenceApp.views import ConferenceViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'conferences', ConferenceViewSet)
+
 urlpatterns = [
+    path('API/', include(router.urls)),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('admin/', admin.site.urls),
